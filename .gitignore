@@ -1,0 +1,78 @@
+# API Keys and Secrets - NEVER COMMIT THESE!
+config.json
+*.key
+*.secret
+api_keys.txt
+credentials.json
+.env
+.env.local
+.env.production
+
+# Build directories
+build/
+cmake-build-*/
+bin/
+obj/
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+trader
+bitcoin-trader
+
+# Object files
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+
+# Static libraries
+*.a
+*.lib
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Log files
+logs/
+*.log
+data/logs/
+
+# Trading data (optional - you might want to track some test data)
+data/live_trading/
+data/real_trades/
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Model files (can be large)
+data/models/*.bin
+data/models/*.model
+*.pkl
+
+# Backup files
+*.bak
+*.backup
+
+# Core dumps
+core
+core.*
