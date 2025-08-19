@@ -1,6 +1,7 @@
 #include <iostream>
 #include "binance.h"
 
+
 int main() {
     std::cout << "Starting Binance API Test..." << std::endl;
     
