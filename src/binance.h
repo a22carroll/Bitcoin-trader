@@ -39,6 +39,8 @@ private:
     std::string base_url_;     // Base URL for API calls (testnet vs live)
     bool testnet_;            // Flag to use testnet (fake money) vs live trading
 
+    
+
 public:
     // Constructor - called when you create a BinanceClient object
     // testnet=true means use fake money by default (safer for development)
@@ -77,6 +79,12 @@ public:
 private:
     // Private helper methods - only used internally by this class
     
+
+    std::string create_signature(const std::string& data) const;
+    long get_timestamp() const;
+    
+    // And the config loader:
+    void load_config_from_file(const std::string& config_file);
     // Make a basic HTTP request to public endpoints
     std::string make_request(const std::string& endpoint) const;
     
