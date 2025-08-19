@@ -5,6 +5,9 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
 endif()
 
+# Set triplet for static linking
+set(VCPKG_TARGET_TRIPLET "x64-windows-static")
+
 project(BinanceTest)
 
 # Debug: Print vcpkg status
@@ -15,10 +18,12 @@ message(STATUS "VCPKG_TARGET_TRIPLET: ${VCPKG_TARGET_TRIPLET}")
 find_package(CURL REQUIRED)
 find_package(jsoncpp CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(QuantLib REQUIRED)
 
 # Debug: Print what jsoncpp provides
 get_target_property(JSONCPP_LIBS jsoncpp_lib INTERFACE_LINK_LIBRARIES)
 message(STATUS "jsoncpp targets available")
+message(STATUS "QuantLib found: ${QuantLib_FOUND}")
 
 # Create test executable for binance
 add_executable(test_binance test/test_binance.cpp src/binance.cpp)
@@ -29,12 +34,17 @@ target_link_libraries(test_binance
     jsoncpp_lib
     OpenSSL::SSL 
     OpenSSL::Crypto
+    QuantLib::QuantLib
 )
 set_property(TARGET test_binance PROPERTY CXX_STANDARD 17)
 
 # Create test executable for market data
 add_executable(test_market_data test/test_market_data.cpp src/market_data.cpp)
 target_include_directories(test_market_data PRIVATE src)
+target_link_libraries(test_market_data 
+    PRIVATE 
+    QuantLib::QuantLib
+)
 set_property(TARGET test_market_data PROPERTY CXX_STANDARD 17)
 
 # Main trading bot executable is commented out until main.cpp is created
@@ -51,5 +61,6 @@ set_property(TARGET test_market_data PROPERTY CXX_STANDARD 17)
 #     jsoncpp_lib
 #     OpenSSL::SSL 
 #     OpenSSL::Crypto
+#     QuantLib::QuantLib
 # )
 # set_property(TARGET bitcoin_trader PROPERTY CXX_STANDARD 17)
